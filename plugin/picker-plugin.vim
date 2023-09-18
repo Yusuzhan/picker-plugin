@@ -1,6 +1,6 @@
 " Title: Picker Plugin
 " Description: Picks lines matching pattern into a new buffer
-" Last Changed: 15 September 2023
+" Last Changed: 17 September 2023
 " Maintainer: Suzhan Yu <https://github.com/suzhanyu>
 
 " Prevents the plugin from being loaded multiple times. If the loaded
