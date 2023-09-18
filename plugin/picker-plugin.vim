@@ -12,10 +12,22 @@ endif
 let g:loaded_pickerplugin = 1
 
 command! -nargs=1 Pick call Pick(<q-args>) 
+command! -nargs=0 Foo call Foo() 
 
 function! Pick(p)
   let @c=''
   execute 'g/' . a:p . '/y C'
   new
   norm! "cp
+  norm! gg
+
+  " delete until the first non-blank line
+  exe 'g/^$/d'
+  echom expand('%:p')
+  let name = 'result' . strftime('%Y-%m-%dT%H:%M:%S')
+  execute 'w ' . l:name
+endfunction
+
+function! Foo()
+  exe 'g/^$/d'
 endfunction
