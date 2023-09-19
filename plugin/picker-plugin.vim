@@ -16,7 +16,7 @@ command! -nargs=1 Pick call Pick(<q-args>)
 function! Pick(p)
   let @c=''
   execute 'g/' . a:p . '/y C'
-  if getreg('c') =~ ''
+  if getreg('c') == ''
     return
   endif
   let l:name = Generate_result_file_name()
