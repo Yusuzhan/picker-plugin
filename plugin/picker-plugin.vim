@@ -12,18 +12,35 @@ endif
 let g:loaded_pickerplugin = 1
 
 command! -nargs=1 Pick call Pick(<q-args>) 
-command! -nargs=0 Foo call Foo() 
 
 function! Pick(p)
   let @c=''
   execute 'g/' . a:p . '/y C'
+  if getreg('c') =~ ''
+    return
+  endif
+  let l:name = Generate_result_file_name()
   new
   norm! "cp
   norm! gg
 
   " delete until the first non-blank line
   exe 'g/^$/d'
-  echom expand('%:p')
-  let name = 'picker-result-' . strftime('%Y-%m-%dT%H:%M:%S')
   execute 'w ' . l:name
+endfunction
+
+function! Generate_result_file_name()
+  let file = expand('%:p')
+  let dir = matchstr(file, '.*\/')
+  let files_str = globpath(dir, '*')
+  let files = split(files_str)
+  let l:largest = 0
+  for result in files
+    let l:num = str2nr(matchstr(result, '\v(picker-result-)@<=\d+'))
+    if l:num > l:largest
+      let l:largest = num
+    endif
+  endfor
+  let l:largest = l:largest + 1
+  return 'picker-result-' . l:largest . '.txt'
 endfunction
