@@ -2,7 +2,7 @@
 
 A Vim plugin, picks lines mathcing pattern into a new buffer
 
-[!picker-plugin](picker-plugin.png)
+![picker-plugin](/picker-plugin.png)
 
 ## Install 
 
